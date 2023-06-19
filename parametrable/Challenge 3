@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    parameters {
+        string(defaultValue:"test_deployement",description:"deployement name" , name:"DeployementName")
+        choice(
+            choices: ['EU-WEST-2A', 'EU-WEST-2B','EU-WEST-2C'],
+            description: 'in wich AZ you want to Deploy',
+            name: 'DeployementZone'
+        )
+        booleanParam(defaultValue:"false", description:"confirm deployment", name:"DeployConfirmation")
+    }
+    stages {
+        stage("Demo"){
+            steps {
+                echo "deployement name is : ${params.DeployementName} \n"
+                echo "Envirement shoosen to deploy in is: ${params.DeployementZone} \n"
+                echo "confimation is set to: ${params.DeployConfirmation} \n"
+            }
+        }
+    }
+}
